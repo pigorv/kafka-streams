@@ -19,6 +19,9 @@ public class KafkaTopicConfig {
     @Value("${kafka.topic.name}")
     private String topicName;
 
+    @Value("${user.info.topic.name}")
+    private String userInfoTopicName;
+
     @Bean
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
@@ -29,5 +32,10 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic baseTopic() {
         return new NewTopic(topicName, 3, (short) 1);
+    }
+
+    @Bean
+    public NewTopic userInfoTopic() {
+        return new NewTopic(userInfoTopicName, 1, (short) 1);
     }
 }
